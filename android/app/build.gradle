@@ -1,0 +1,47 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // يجب أن يأتي ملحق Flutter بعد ملحقي Android وKotlin
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace = "com.example.school_control"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+
+    defaultConfig {
+        applicationId = "com.example.school_control"
+        // الأجهزة الجديدة فقط (أندرويد 10 فما فوق) لتقليل الحجم والتوافقيات القديمة
+        minSdk = 29
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+
+        // تقليل الحجم: معمارية arm64 فقط (تعمل على كل الهواتف الحديثة).
+        // لدعم الهواتف القديمة 32 بت أضف: 'armeabi-v7a'
+        ndk {
+            abiFilters 'arm64-v8a'
+        }
+    }
+
+    buildTypes {
+        release {
+            // توقيع تجريبي (debug) ليعمل أمر flutter run --release؛ للنشر استبدله بمفتاح خاص
+            signingConfig = signingConfigs.debug
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}

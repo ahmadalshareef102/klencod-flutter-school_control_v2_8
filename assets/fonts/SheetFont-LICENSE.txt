@@ -1,0 +1,1 @@
+DejaVu fonts (c) Bitstream Vera / Tavmjong Bah: free license (https://dejavu-fonts.github.io/License.html). Subset used for printed sheets.
